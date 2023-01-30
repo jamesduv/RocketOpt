@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-@author: jd
-contact: jamesduv@umich.edu
-affiliation: University of Michigan, Department of Aerospace Eng., CASLAB
-"""
 import numpy as np
 
 def comp_stress(design_vars, mesh_param, material_prop, mesh_out, flow_out, heat_out):

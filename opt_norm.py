@@ -1,13 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-@author: jd
-contact: jamesduv@umich.edu
-affiliation: University of Michigan, Department of Aerospace Eng., CASLAB
-"""
-
-
-import sys, os, pickle
+import sys
+import os
+import pickle
 import numpy as np
 import scipy.optimize as opt
 
@@ -48,23 +41,23 @@ def dev_opt_norm(is_save_res = True):
     ndv = 12
     x0 = np.ones(ndv) * 0.5
 
-    bounds = [(0, 1),          #chamber radius
-          (0, 1),           #chamber length
-          (0, 1),      #chamber pressure, atm
-          (0, 1),     #beta_nc
-          (0, 1),     #beta_nd
-          (0, 1),      #fuel mass flow rate
-          (0, 1),   #equivalence ratio
-          (0, 1),       #nozzle expansion ratio
-          (0, 1),     #inner wall thickness
-          (0, 1),    #channel thickness
-          (0, 1),   #shell thickness)
-          (0, 1)]     #fuel cooling  fraction
-    gamma = 1.2
-    R = 370
-    Tc = 3600
-    pc = 80 * 101325
-    mdot_o = 20 / 1.2 / 0.25
+    bounds = [  (0, 1),          #chamber radius
+                (0, 1),           #chamber length
+                (0, 1),      #chamber pressure, atm
+                (0, 1),     #beta_nc
+                (0, 1),     #beta_nd
+                (0, 1),      #fuel mass flow rate
+                (0, 1),   #equivalence ratio
+                (0, 1),       #nozzle expansion ratio
+                (0, 1),     #inner wall thickness
+                (0, 1),    #channel thickness
+                (0, 1),   #shell thickness)
+                (0, 1)]     #fuel cooling  fraction
+    gamma   = 1.2
+    R       = 370
+    Tc      = 3600
+    pc      = 80 * 101325
+    mdot_o  = 20 / 1.2 / 0.25
     mdot    =  20 + mdot_o
 
     limits = {
@@ -208,7 +201,15 @@ def opt_unc():
     return xopt_sc, res, model_out, limits
 
 def design_vars_vec2dict(x, limits):
-    '''Convert the normalized input vector to a dictionary of scaled values'''
+    '''Convert the normalized input vector to a dictionary of scaled, dimensional values
+    
+    Args:
+        x (ndarray)     : vector of normalized (0-1) design variables
+        limits (dict)   : named limit tuples, (minval, maxval) for each entry of the design variables, 
+            to recover dimensional quantities
+    Returns:
+        phys_vals (dict)    : the design variables in dimensional quantities
+    '''
 
     norm = {
         'rc'        : x[0],      # radius, combustion chamber [m]
@@ -232,10 +233,18 @@ def design_vars_vec2dict(x, limits):
 
     return phys_vals
 
-def fobj_mass(x, limits):
-    '''Objective function - mass'''
+def fobj_mass(mu, limits):
+    '''Objective function - mass
+    
+    Args:
+        x (ndarray)     : vector of normalized (0-1) design variables
+        limits (dict)   : named limits, xmin, xmax for each entry of the design variables, to recover dimensional quantities
 
-    design_vars = design_vars_vec2dict(x, limits)
+    Retuns:
+        mass (float)    : the total structural mass
+    '''
+
+    design_vars = design_vars_vec2dict(mu, limits)
 
     material_prop, mesh_param, flow_bc = get_prop_param_bc()
 

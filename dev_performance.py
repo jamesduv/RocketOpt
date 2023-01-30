@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-@author: jd
-contact: jamesduv@umich.edu
-affiliation: University of Michigan, Department of Aerospace Eng., CASLAB
-"""
-
 import numpy as np
 
 def comp_performance(design_vars, flow_bc, geom_out, therm_out, flow_out):
