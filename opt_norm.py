@@ -432,7 +432,12 @@ def get_prop_param_bc():
     flow_bc['cp_fuel'] = cp_cool
     return material_prop, mesh_param, flow_bc
 
+def test():
+    bounds = [(0,1),]*12
+    test = 1
+
 if __name__ == '__main__':
-    xopt, res, model_out, limits = dev_opt_norm()
+    test()
+    # xopt, res, model_out, limits = dev_opt_norm()
     # xopt, res, model_out, limits = opt_unc()
     # explore()
