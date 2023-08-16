@@ -1,7 +1,7 @@
 # RocketOpt
-Design optimization of a simplified rocket thrust chamber. This was a final project for Aero 588 Multidisciplinary Design Optimization taught by Professor Martins.
+Design optimization of a simplified rocket thrust chamber. This was a final project for Aero 588 Multidisciplinary Design Optimization taught by Professor Martins at the University of Michigan.
 
-Gradient-based design optimization is applied to the design of a rocket thrust chamber with incrementally more constraints added. See DuvallJames_FinalProject.pdf for the final report which describes all of the sub-models in detail.
+Gradient-based design optimization is applied to the design of a rocket thrust chamber with incrementally more constraints added. See DuvallJames_FinalProject.pdf for the final report which describes all of the sub-models and constraint scenarios and results in detail. 
 
 See run_optimizer.ipynb for a condensed presentation and implementations for Isp-only and thrust-only constraint scenarios. Examples with more constraints following the final report to be added.
 
